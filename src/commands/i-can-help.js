@@ -7,8 +7,10 @@ async function iCanHelp (msg) {
         // Send the message from a channel to add the role.
         return;
     }
-    const role = await msg.guild.roles.fetch(config.helperRoleId);
-    member.roles.add(role).catch(console.error);
+    const helperRole = await msg.guild.roles.fetch(config.helperRoleId);
+    const needHelpRole = await msg.guild.roles.fetch(config.needHelpRoleId);
+    member.roles.remove(needHelpRole).catch(console.error);
+    member.roles.add(helperRole).catch(console.error);
 }
 
 module.exports = {
